@@ -1,0 +1,19 @@
+LWPsix
+======
+
+LWP reimagined for Rakudo Perl 6.
+
+Dependencies
+============
+
+LWPsix depends on:
+- MIME::Base64*
+- URI*
+*not yet, but we will
+
+All dependencies can be acquired from http://modules.perl6.org/
+
+Current status
+==============
+
+In the requirements-gathering stage.
