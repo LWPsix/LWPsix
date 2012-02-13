@@ -1,0 +1,23 @@
+\documentclass{article}
+\begin{document}
+
+\part*{Overview of Classes and Packages}
+    Class structure is much like original LWP's.
+    \begin{description}
+        \item[LWP]
+        \item[LWP::UserAgent] WWW user agent class
+        \item[LWP::Protocol] Interface to various protocol schemes
+        \begin{description}
+            \item[LWP::Protocol::http] http:// access
+        \end{description}
+        \item[HTTP::Headers] MIME/RFC822 style header (used by HTTP::Message)
+        \item[HTTP::Message] HTTP style message
+        \begin{description}
+            \item[HTTP::Request] HTTP style request
+            \item[HTTP::Response] HTTP style request
+        \end{description}
+        \item[HTTP::Daemon] A HTTP server class
+        \item[HTTP::Status] HTTP status code (200 OK etc)
+    \end{description}
+
+\end{document}
