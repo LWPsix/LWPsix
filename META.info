@@ -1,0 +1,7 @@
+{
+    "name" : "LWP",
+    "version" : "*",
+    "description" : "LWP for Perl 6",
+    "depends" : [ ],
+    "source-url" : "git://github.com/LWPsix/LWPsix.git"
+}
