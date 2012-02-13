@@ -1,0 +1,85 @@
+\documentclass{article}
+\newcommand{\LWP}{\emph{LWP(original)}}
+\newcommand{\LWPsix}{\emph{LWPsix}}
+\begin{document}
+
+\part*{Goals}
+    \LWPsix{} is the Perl 6 analog of Perl's \LWP{}; as such, the considerations
+    behind \LWPsix{} and the differences from its predecessor are very similar
+    to the evolution from Perl to Perl 6.
+    
+    Larry Wall said of Perl 6 ``we decided it would be better to fix the
+    language than to fix the user''; in \LWPsix{}, we aim to identify the parts
+    of the \LWP{} API that have been used in similar ways in many applications,
+    and reorient the library such that the most obvious interfaces are those
+    that most directly apply to the most common usage patterns -- taking the
+    parts that users frequently implement and the helpers that they most
+    frequently employ, and integrating them into the library front and center.
+    We seek to make the easy things easier, while taking care to keep the hard
+    things accessible. We want to make the highest-level interfaces that are in
+    frequent use the most obvious interfaces, while still offering more raw
+    access -- which we would design to be accessed primarily by subclassers.
+
+    Also we'll be Perl 6-idiomatic, so we will have differences mirroring the
+    differences between the language styles. ``Real'' OOP, roles, rules,
+    junctions, etc will affect things.
+
+\part*{\LWPsix{} usage}
+    \section*{Overview}
+        At the highest level, the interface follows the same paradigm as \LWP{}:
+        \begin{itemize}
+            \item create a \texttt{Request}
+            \item give it to a \texttt{UserAgent}
+            \item get a \texttt{Response}
+        \end{itemize}
+        The service is stateless; all the information required to make a request is
+        specified in that \texttt{Request} object.
+
+% this is a bunch of stuff from the LWP perldoc that seems like it's what LWP
+% consider their ``requirements'', so our own requirement set should probably be
+% informed by these:
+\part*{\LWP{} is}
+    ``a simple and consistent \ldots API to the World-Wide Web''
+
+    ``The main focus of the library is to provide classes and functions that
+    allow you to write WWW clients.''
+
+    ``The library also contain modules that are of more general use and even
+    classes that help you implement simple HTTP servers.''
+
+    ``Most modules in this library provide an object oriented API. The user
+    agent, requests sent and responses received from the WWW server are all
+    represented by objects. This makes a simple and powerful interface to these
+    services. The interface is easy to exntend and customize for your own needs.
+
+    ``Contains various reusable components (modules) that can be used separately
+    or together.''
+
+    ``Provides an object oriented model of HTTP-style communication. Within this
+    framework we currently support access to http, https, gopher, ftp, news,
+    file, and mailto resources.''
+
+    ``Provides a full object oriented interface or a very simple procedural
+    interface.''
+
+    ``Supports the basic and digest authorization schemes.''
+
+    ``Supports transparent redirect handling.''
+
+    ``Supports access through proxy servers.''
+
+    ``Provides parser for robots.txt files and a framework for constructing
+    robots.''
+
+    ``Supports parsing of HTML forms.''
+
+    ``Implements HTTP content negotiation algorithm that can be used both in
+    protocol modules and in server scripts (like CGI scripts).''
+
+    ``Supports HTTP cookies.''
+
+    ``Some simple command line clients, for instance ``lwp-request'' and
+    ``lwp-download''.''
+
+
+\end{document}
