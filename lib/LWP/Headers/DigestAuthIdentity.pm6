@@ -1,0 +1,3 @@
+class DigestAuthIdentity does Identity{
+
+}

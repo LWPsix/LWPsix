@@ -1,0 +1,5 @@
+class BasicAuthIdentity does Identity {
+
+	
+
+}

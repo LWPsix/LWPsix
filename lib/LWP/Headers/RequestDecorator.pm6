@@ -1,0 +1,5 @@
+role RequestDecorator {
+
+
+	method decorationsForUrl() { ... }
+}
