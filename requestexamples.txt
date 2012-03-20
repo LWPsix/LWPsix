@@ -1,0 +1,23 @@
+# request: must know method (GET/POST/etc)
+
+#assuming existence of $ua as var of type UserAgent
+$req = $ua.request("http://www.longdongs.net/paid/willy_mcwangs.htm");
+
+#OR WE CAN DO
+
+$req = $ua.request(:url("http://reddit.com/r/spacedicks/search?"), :query({'q' => 'searchTerm', 'restrict_sr' => 'off', 'is_self' => 'no'}), :method('POST'));
+
+#...
+
+method request($url, %query?, $method = 'GET') {
+	#...
+	
+	#if we're doing a query, we process dat hash ALL UP INS
+	
+	if(defined(%query))
+	{
+		for(%query.kv) -> $k, $v {
+			$url ~= ($k ~ "=" ~ $v ~ "&"); # note: how to avoid concatenating the last "&"?
+		}
+	}
+}
