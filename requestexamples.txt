@@ -1,11 +1,11 @@
 # request: must know method (GET/POST/etc)
 
 #assuming existence of $ua as var of type UserAgent
-$req = $ua.request("http://www.longdongs.net/paid/willy_mcwangs.htm");
+$req = $ua.request("http://www.textfiles.net/user/LWPsix/example.txt");
 
 #OR WE CAN DO
 
-$req = $ua.request(:url("http://reddit.com/r/spacedicks/search?"), :query({'q' => 'searchTerm', 'restrict_sr' => 'off', 'is_self' => 'no'}), :method('POST'));
+$req = $ua.request(:url("http://reddit.com/r/pics/search?"), :query({'q' => 'searchTerm', 'restrict_sr' => 'off', 'is_self' => 'no'}), :method('POST'));
 
 #...
 
