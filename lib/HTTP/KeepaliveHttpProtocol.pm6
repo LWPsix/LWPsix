@@ -1,5 +1,6 @@
+use v6;
 class KeepaliveHttpProtocol is HttpProtocol {
-	has $connection
+	has $connection;
 
 	method get_connection() {		
 		defined($connection) ?? return connection !! new_connection(host, port)

@@ -1,3 +1,5 @@
+use v6;
+
 class ProxiedHttpProtocol is HttpProtocol {
 	has $host
 	has $port
