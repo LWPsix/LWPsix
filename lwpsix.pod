@@ -1,0 +1,169 @@
+=head1 LWPsix
+
+LWPsix - Library for Web Programming in Perl 6
+
+=head1 Synopsis
+
+    use LWPsix;
+    my UserAgent $ua .= new(:useragent('Demo UA'), :keepalive, :timeout(15));
+    my Response $res = $ua.request( 'http://www.google.com/search',
+                                    :query(q => 'Perl 6', ie => 'utf-8'));
+    die unless $res;
+    for $res.lines -> $line {
+        say $line;
+    }
+
+=head1 DESCRIPTION
+
+LWPsix is a set of Perl 6 modules providing a high-level implementation of the
+HTTP protocol. The primary goal of the library is to handle all the common web
+use cases in as simple and straightforward of a way as possible, while providing
+for subclassers a basis upon which to build more complex behavior in a sensible
+way.
+
+The interface supports concurrency through lazy evaluation; the user may send a
+request, do something else, and then access the results - reading a line will
+block only if the line hasn't arrived yet.
+
+The main features are:
+
+=over 2 
+
+=item * Transparent handling of redirects
+
+=item * Automatic reassembly of chunked results
+
+=item * Support for HTTPS
+
+=item * Support for HTTP/1.0
+
+=item * Support for HTTP proxies
+
+=item * Connection persistence with keepalive
+
+=item * Cookie handling
+
+=item * Basic and Digest authentication
+
+=back
+
+=head1 USAGE
+
+=head2 The UserAgent Object
+
+I<UserAgent> is the central object of the interface; it coordinates all
+interaction with the servers, remembers any necessary state information, and
+configures options that apply to all requests sent.
+
+The main attributes of the I<UserAgent> are:
+
+=over 2 
+
+=item * B<agent> is the "User-agent" string by which the application identifies
+itself to servers.
+
+=item * B<timeout> is the number of seconds the library will wait before
+returning an error if the server has not fully responded to a request.
+
+=item * B<proxy> is an object through which all requests will be sent,
+presumably for the use of some proxy server.
+
+=item * B<keepalive> is a boolean specifying whether to maintain a connection to
+each server, reusing it for each request.
+
+=item * B<cookiejar> is a I<CookieJar> containing any I<Cookie>s collected
+during this session.
+
+=back
+
+I<UserAgent> supports these operations:
+
+=over 2 
+
+=item * B<request> executes a request and returns a I<Response> object.
+
+=item * B<authenticate> takes a I<Credentials> and sends it to the server.
+
+=back
+
+=head2 The Response Object
+
+The I<Response> object encapsulates the results of a single request.
+
+The "payload" of a I<Response> can be accessed through one of several fields:
+
+=over 2 
+
+=item * B<lines> is a lazy list of each line of data from the server. It will
+block if and only if it is accessed and no line is currently available from the
+server. The object itself has a boolean false value if an error has occurred.
+
+=item * B<data> is the complete result. Reading I<data> will block until the
+full response has been received.
+
+=item * B<error> is null in case of success, or an Error object with details of
+the type of failure that has occurred. The Response object itself evaluates to
+False if and only if I<error> is non-null.
+
+=back
+
+Other attributes provide important metainformation:
+
+=over 2
+
+=item * B<content_type> is the I<Content-type> sent by the server along with the
+reply.
+
+=item * B<certificate> contains a I<Certificate> object if the request was made
+with HTTPS, or null if there is none.
+
+=back
+
+=head2 The HttpProxy Object
+
+HttpProxy is an object through which requests can be passed in order to send
+them through an HTTP proxy server. Pass an instance of this to a I<UserAgent> in
+order to proxy requests transparently.
+
+The main attributes of I<HttpProxy> are:
+
+=over 2 
+
+=item * B<host> is the hostname or IP address of the proxy server.
+
+=item * B<port> is the TCP port on which to connect to the server. Defaults to
+80 if unspecified.
+
+=back
+
+=head2 Exceptions
+
+I<To be determined.>
+
+=head2 The Certificate Object
+
+I<Interface to be determined.>
+
+=head2 Request Augmentation
+
+=head3 The RequestDecorator object
+
+Base class for objects that provide additional fields for requests.
+
+=head3 The CookieJar RequestDecorator
+
+I<Interface to be determined.>
+
+=head3 The CredentialCache RequestDecorator
+
+I<Interface to be determined.>
+
+=head4 BasicAuthentication
+
+I<Interface to be determined.>
+
+=head4 DigestAuthentication
+
+I<Interface to be determined.>
+
+=cut
