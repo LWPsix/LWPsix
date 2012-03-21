@@ -1,3 +1,3 @@
-class DigestAuthIdentity does Identity{
+class DigestAuthIdentity is Identity{
 
 }

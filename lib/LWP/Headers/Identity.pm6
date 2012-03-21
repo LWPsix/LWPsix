@@ -1,10 +1,10 @@
-role Identity {
+class Identity {
 	has $.username;
 	has $.password;
 
 
-	method new(:$Username, :$Password) { ... }
+	method new is abstract;
 	
-	method text() { ... }
+	method text is abstract;
 	
 }

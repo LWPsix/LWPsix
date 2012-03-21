@@ -1,4 +1,4 @@
-class CookieJar does ResponseExaminer does RequestDecorator	{
+class CookieJar is ResponseExaminer is RequestDecorator	{
 	has
 	has Cookie @!Cookies; 
 	has

@@ -1,5 +1,5 @@
-role RequestDecorator {
+class RequestDecorator {
 
 
-	method decorationsForUrl() { ... }
+	method decorationsForUrl 
 }

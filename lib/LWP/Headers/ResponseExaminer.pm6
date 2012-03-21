@@ -1,3 +1,3 @@
-role ResponseExaminer {
+class ResponseExaminer {
 
 }

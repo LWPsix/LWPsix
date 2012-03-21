@@ -1,4 +1,4 @@
-class BasicAuthIdentity does Identity {
+class BasicAuthIdentity is Identity {
 
 	
 
