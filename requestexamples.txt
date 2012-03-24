@@ -1,4 +1,4 @@
-# request: must know method (GET/POST/etc)
+# request: must know method (GET/POST/etc ... GET is default)
 
 #assuming existence of $ua as var of type UserAgent
 $req = $ua.request("http://www.textfiles.net/user/LWPsix/example.txt"); #simplest case: user wants to use GET request to get the data from a specified url; no extra frills needed
