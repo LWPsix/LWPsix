@@ -2,16 +2,28 @@
 
 LWPsix - Library for Web Programming in Perl 6
 
+=head1 Status
+
+Structuring skeleton code according to UML diagram and implementing individual modules.
+
+=head1 Dependencies
+
+LWPsix depends on
+
+=over 2
+
+=item MIME::Base64
+
+=item URI
+
+=back
+
 =head1 Synopsis
 
     use LWPsix;
     my UserAgent $ua .= new(:useragent('Demo UA'), :keepalive, :timeout(15));
     my Response $res = $ua.request( 'http://www.google.com/search',
                                     :query(q => 'Perl 6', ie => 'utf-8'));
-    die unless $res;
-    for $res.lines -> $line {
-        say $line;
-    }
 
 =head1 DESCRIPTION
 
@@ -20,10 +32,6 @@ HTTP protocol. The primary goal of the library is to handle all the common web
 use cases in as simple and straightforward of a way as possible, while providing
 for subclassers a basis upon which to build more complex behavior in a sensible
 way.
-
-The interface supports concurrency through lazy evaluation; the user may send a
-request, do something else, and then access the results - reading a line will
-block only if the line hasn't arrived yet.
 
 The main features are:
 
@@ -48,6 +56,24 @@ The main features are:
 =back
 
 =head1 USAGE
+	
+=head2 GET
+	use LWPsix;
+	my UserAgent $ua .= new;
+	my Response $resp = ua.request('http://www.petdance.com/');
+	
+=head2 HEAD
+	use LWPsix;
+	
+
+=head2 POST
+
+=head2 Proxies
+
+=head2 Authentication/HTTPS
+
+
+=head1 STRUCTURE
 
 =head2 The UserAgent Object
 
