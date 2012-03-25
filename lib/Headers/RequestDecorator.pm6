@@ -1,5 +1,5 @@
 class RequestDecorator {
 
 
-	method decorationsForUrl 
+	method decorationsForUrl is abstract;
 }

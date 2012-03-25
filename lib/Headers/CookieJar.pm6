@@ -12,7 +12,11 @@ class CookieJar is ResponseExaminer is RequestDecorator	{
 	method loadData(String $data) { 
 	}
 	
-	method addCookie(:$cookie, :$domain) {
+	#Add a Cookie to this CookieJar.
+	method addCookie(:$cookie, :$domain) { #Is this method signature correct? We may need to use slurpy parameters instead.
+	
+		#my @tmp = @Cookies;
+		#@Cookies = (@tmp, @(<cookie.new({domain => $domain,)>));
 	}
 	
 
