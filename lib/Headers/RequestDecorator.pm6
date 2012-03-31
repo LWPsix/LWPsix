@@ -1,5 +1,7 @@
-class RequestDecorator {
+role RequestDecorator {
 
 
-	method decorationsForUrl is abstract;
+	method decorationsForUrl() {
+	
+	}
 }

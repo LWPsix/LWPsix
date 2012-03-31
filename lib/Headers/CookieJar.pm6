@@ -1,7 +1,9 @@
-class CookieJar is ResponseExaminer is RequestDecorator	{
-	has
+use v6;
+
+class CookieJar does ResponseExaminer does RequestDecorator	{
+	#has
 	has Cookie @!Cookies; 
-	has
+	#has
 
 	method serializePersistentData() {
 	}

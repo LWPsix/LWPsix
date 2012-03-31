@@ -1,7 +1,9 @@
+use v6;
+
 class CredentialCache {
-	has
-	has
-	has
+	#has
+	#has
+	#has
 	
 	method serializeData() {
 	}
