@@ -1,28 +1,18 @@
 class Cookie {
-	
-	
-	#Initially set each value of the key-value pair to be 0. Users fill in what they need when they create a new cookie.
-	has %.kvs =	value 	=> 0,
-				domain 	=> 0,
-				name	=> 0,
-				path	=> 0,
-				secure	=> 0,
-				expires	=> 0,
-				comment	=> 0,
-				version	=> 0;
+    has Str $.name = die "'name' field required";
+    has Str $.value;
+    has Str $.path;
+    has DateTime $.expires;
+    has Bool $.http_only;
+    has Bool $.secure;
+    # XXX: Cookie's don't have domains - domains have cookies
 
-				
-	#Create a new cookie, filling in desired values.
-	method new(*%pairs) {
-		for %pairs.kv -> $k, $v { #For each key-value pair in the argument hash, we can selectively set elements of the cookie.
-			%.kvs{$k} = $v;
-		}
-	}
-	
-	#Display contents of this cookie.
-	method contents() {
-		for %.kvs.kv -> $k, $v {
-			say "$k.capitalize(): $v\n";
-		}
-	}
+    method ^parse(Str $header) {
+        # parse ALL the things
+        return Cookie.new(...);
+    }
+
+    method Str {
+        # serialize; output should be parse-compatible
+    }
 }
