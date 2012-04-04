@@ -1,9 +1,8 @@
 use v6;
 
 class Protocol {
-	
-	method request($url, ...) {
-
+	method request(Str $url, ...) {
+        # abstract
+        ...
 	}
-
 }
