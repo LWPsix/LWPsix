@@ -1,13 +1,16 @@
 use v6;
+
 class HttpProtocol is Protocol {
-	has @.examiners;
-	has @.decorators;
+	has Examiner @.examiners;
+	has Decorator @.decorators;
 
-	method request($url, $method = 'GET', Bool $:keepalive?) {
-		
+	method request(Str $url, $method = 'GET') {
+        # TODO
+        ...
 	}
 
-	get_connection() {
-		
-	}
+	method get_connection(Str $host) returns Connection {
+        # abstract
+        ...
+    }
 }
