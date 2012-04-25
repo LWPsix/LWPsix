@@ -9,5 +9,11 @@ class Identity {
 	
 		say "Username: $.username\nPassword: $.password";
 	}
+
+
+	method raw() { #for single-string data "serialization"
 	
+		return "USER:$.username|PASS:$.pass";	
+	
+	}	
 }
