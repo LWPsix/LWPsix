@@ -15,7 +15,7 @@ role RequestDecorator {
 			for @pairs -> $qu, $vl {
 			
 				$quer = $quer ~ "$qu=$vl"; #Put them together
-				if(ind < size) {
+				if ind < size {
 					$quer = $quer ~ "&"; #If not at the last pair, we have more to go
 				}
 				ind = ind + 1;
