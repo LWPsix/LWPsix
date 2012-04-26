@@ -7,6 +7,7 @@ class DigestAuthIdentity is Identity{
 		
 		$!username = md5_hex($un);
 		$!password = md5_hex($pw);
+		$!security = true;
 		
 	}
 	

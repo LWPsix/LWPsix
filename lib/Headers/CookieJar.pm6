@@ -5,10 +5,15 @@ class CookieJar does ResponseExaminer does RequestDecorator	{
 	has Cookie @!Cookies; 
 	#has
 
-	method serializePersistentData() {
+	method serializePersistentData() { #serialize SOME OF the things...
+		#only if $.expires on the cookie is set to the "doesn't expire" value?	
+	
 	}
 	
-	method serializeAllData() {
+	method serializeAllData() { #serialize ALL the things!
+	
+		return ~ @!Cookies; #same as concatenating them all, basically - could this work?
+	
 	}
 	
 	method loadData(String $data) { 

@@ -6,6 +6,7 @@ class BasicAuthIdentity is Identity {
 		
 		$!username = $un;
 		$!password = $pw;
+		$!security = false;
 		
 	}
 	
