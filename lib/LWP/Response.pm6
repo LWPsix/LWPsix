@@ -1,15 +1,12 @@
 use v6;
 
 class Response {
-	has $content_type;
-	has $status;
-	has $data;
+	has $.content_type;
+	has $.status;
+	has $.data;
 
-	method new(...) {
+	# TODO: new() take in response scalar and serialize it into Response object
+	method new() {
 		# TODO: bless to create object
-	}
-
-	method parse_response(...) { #...?
-	...
 	}
 }

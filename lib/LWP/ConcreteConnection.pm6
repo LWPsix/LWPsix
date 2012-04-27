@@ -4,9 +4,10 @@ use URI;
 
 class ConcreteConnection {
 	has $sock;
-	method new(Str $host, Str $port) {
+	method new(Str $host, Str $port) { # do we even need to write a new()?
 		$sock = IO::Socket::INet.new(:$host, :$port);
-		# TODO: bless to return an instance of the object
+		# TODO: bless to return an actual instance of the object
+		return self.bless(*, :$sock);
 	}
 
 	method send(Str $req)
@@ -19,10 +20,13 @@ class ConcreteConnection {
 
 	method recv()
 	{
-		# TODO: Examine response for size to recv
-		my $recvd = $sock.recv(buffer_size);
-		return parse_response($recvd);
+		my $recvd = $sock.recv();
+		# TODO: Parse response into a Response object
+		return Response.new($recvd);
 	}
 
-# It bothers me that we don't ever call close on sockets and leave it up to the garbage collector to destroy stuff. I'm pretty sure even in a high-level language we should still be making an effort to close the socket...
+	method kill()
+	{
+		$sock.close();
+	}
 }
