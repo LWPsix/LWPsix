@@ -1,4 +1,4 @@
-class LWP::Headers::Cookie {
+class LWPsix::Headers::Cookie {
     has Str $.name = die "'name' field required";
     has Str $.value;		
     has Str $.path;			

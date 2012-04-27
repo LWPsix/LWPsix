@@ -1,7 +1,7 @@
-class LWP::Headers::IdentityMaker { #Factory class for creating identities based on specified security preference.
+class LWPsix::Headers::IdentityMaker { #Factory class for creating identities based on specified security preference.
 
 	#$sec is a Bool, $un and $pw are Str
-	method make(:$sec, :$un, :$pw) returns Identity {
+	method make(Bool :$sec, Str :$un, Str :$pw) returns Identity {
 
 		if $sec {
 			return DigestAuthIdentity.new($un, $pw);

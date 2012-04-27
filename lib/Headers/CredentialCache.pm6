@@ -1,6 +1,6 @@
 use v6;
 
-class LWP::Headers::CredentialCache {
+class LWPsix::Headers::CredentialCache {
 	has Identity %!Identities;	
 	
 	method serializeData() { #Turn the identities into a raw string format.
