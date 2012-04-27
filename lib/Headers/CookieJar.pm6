@@ -12,7 +12,7 @@ class CookieJar does ResponseExaminer does RequestDecorator	{
 	
 	method serializeAllData() { #serialize ALL the things!
 	
-		return ~ @!Cookies; #same as concatenating them all, basically - could this work?
+		return ~ @!Cookies; #same as concatenating them all, basically - could this work since they have their "toString" method?
 	
 	}
 	

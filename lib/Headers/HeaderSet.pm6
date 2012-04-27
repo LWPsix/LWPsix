@@ -10,7 +10,7 @@ class HeaderSet { #Essentially - a dressed-up hash that makes explicit a set of 
 		
 	}
 	
-	method get($field) {
+	method get($field) { #Retrieve the value associated with a header field within the HeaderSet.
 		return %HeadPairs{$f};
 	}
 

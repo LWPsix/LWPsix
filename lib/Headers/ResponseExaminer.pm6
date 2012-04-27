@@ -14,7 +14,11 @@ role ResponseExaminer {
 		
 		shift(@lines);
 		for @lines -> $line {
-			my @parts = $line.split(": ");
+			
+			# We can't just split on ":", as timestamps have HH:MM:SS format.
+			# With standardized headers from the HTTP response received,
+			# this ensures that we get the label and the contents.			
+			my @parts = $line.split(": "); 
 			
 			if +(@parts) == 2 {
 				@ftemp = @fields;

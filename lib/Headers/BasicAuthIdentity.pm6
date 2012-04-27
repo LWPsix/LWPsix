@@ -7,6 +7,8 @@ class BasicAuthIdentity is Identity {
 		#Store username and password in plaintext.
 		$!username = $un;
 		$!password = $pw;
+		
+		#Indicate (for serialization purposes) that this is plaintext.
 		$!security = false;
 		
 	}

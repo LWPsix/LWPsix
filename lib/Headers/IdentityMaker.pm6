@@ -1,6 +1,7 @@
 class IdentityMaker { #Factory class for creating identities based on specified security preference.
 
-	method make(:$sec, :$un, :$pw) returns Identity { #$sec is a Bool, $un and $pw are Str
+	#$sec is a Bool, $un and $pw are Str
+	method make(:$sec, :$un, :$pw) returns Identity {
 
 		if $sec {
 			return DigestAuthIdentity.new($un, $pw);

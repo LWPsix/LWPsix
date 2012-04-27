@@ -56,7 +56,7 @@ class CredentialCache {
 	
 	method getIdentity(:$domain, :$realm) {
 	
-		#If the $domain~"|"~$realm key does not give an Identity back,
+		# If the $domain~"|"~$realm key does not give an Identity back,
 		# can use this structure to handle:
 		#if %Identities{$domain~"|"~$realm} ~~ Identity { #If the returned object is of type Identity
 		#	Handle proper operations in this space, and an else for otherwise
