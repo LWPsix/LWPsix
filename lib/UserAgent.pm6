@@ -1,6 +1,6 @@
 use v6;
 
-class LWPsix::LWP::UserAgent {
+class LWPsix::UserAgent {
     # Wouldn't it make more sense for a UserAgent to have one protocol, and the user to make different agents for different protocols?
     my Protocol %protocols;
 

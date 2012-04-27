@@ -1,6 +1,6 @@
 use v6;
 
-class LWPsix::LWP::Protocol {
+class LWPsix::Protocol {
 	method request(Str $url) {
         # abstract
 	...

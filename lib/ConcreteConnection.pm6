@@ -1,6 +1,6 @@
 use v6;
 
-class LWPsix::LWP::ConcreteConnection { #is Connection {
+class LWPsix::ConcreteConnection { #is Connection {
 	has $.sock;
 	method new(Str $host, Int $port) {
 		return self.bless(*, $.sock => IO::Socket::INET.new(:$host, :$port));
@@ -28,7 +28,7 @@ class LWPsix::LWP::ConcreteConnection { #is Connection {
 	}
 }
 
-my $con = LWP::ConcreteConnection.new("localhost", 1337);
+my $con = LWPsix::ConcreteConnection.new("localhost", 1337);
 say $con.sock;
 $con.send("hello there!\n");
 say $con.recv();
