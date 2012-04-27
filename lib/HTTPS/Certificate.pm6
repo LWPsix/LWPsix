@@ -1,7 +1,7 @@
 use v6;
 use NativeCall;
 
-class Certificate {
+class LWPsix::HTTPS::Certificate {
 	has Str $.raw;							# raw HTML cert; .raw() will return
 	has	CertificateValidator !validator;	# validator
 	has Str $!keyInfo;						# algorithm/key

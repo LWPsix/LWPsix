@@ -2,7 +2,7 @@ use v6;
 use URI;
 
 
-class ConcreteConnection {
+class LWPsix::LWP::ConcreteConnection {
 	has $sock;
 	method new(Str $host, Str $port) { # do we even need to write a new()?
 		$sock = IO::Socket::INet.new(:$host, :$port);

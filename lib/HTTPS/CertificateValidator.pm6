@@ -1,5 +1,5 @@
 use v6;
 
-class CertificateValidator {	# abstract...
+class LWPsix::HTTPS::CertificateValidator {	# abstract...
 	method validate { }	
 }
