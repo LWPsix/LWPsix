@@ -1,8 +1,8 @@
 use v6;
-use LWP::Protocol;
-use LWP::Connection;
+use LWPsix::LWP::Protocol;
+use LWPsix::LWP::Connection;
 
-class HTTP::HttpProtocol is Protocol {
+class LWPsix::HTTP::HttpProtocol is LWPsix::LWP::Protocol {
     has Examiner @.examiners;
     has Decorator @.decorators;
     has Connection %.connection_for_host;

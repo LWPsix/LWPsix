@@ -1,6 +1,6 @@
 use v6;
 
-class TrustingCertificateValidator is CertificateValidator {
+class LWPsix::HTTPS::TrustingCertificateValidator is LWPsix::HTTPS::CertificateValidator {
 	method new {
 		return self.bless;
 	}

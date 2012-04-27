@@ -1,4 +1,4 @@
-class IdentityMaker { #Factory class for creating identities based on specified security preference.
+class LWP::Headers::IdentityMaker { #Factory class for creating identities based on specified security preference.
 
 	#$sec is a Bool, $un and $pw are Str
 	method make(:$sec, :$un, :$pw) returns Identity {

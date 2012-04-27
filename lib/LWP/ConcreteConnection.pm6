@@ -1,9 +1,8 @@
 use v6;
 
-
-class LWP::ConcreteConnection { #is Connection {
+class LWPsix::LWP::ConcreteConnection { #is Connection {
 	has $.sock;
-	method new(Str $host, Int $port) { # do we even need to write a new()?
+	method new(Str $host, Int $port) {
 		return self.bless(*, $.sock => IO::Socket::INET.new(:$host, :$port));
 	}
 

@@ -2,7 +2,7 @@ use v6;
 use NativeCall;
 #use URI;
 
-class SslConnection is Connection {
+class LWPsix::HTTPS::SslConnection is LWPsix::LWP::Connection {
 	has Certificate !certificate;	# private
 
 	sub encrypt(Str, Str, int) returns Str is native("cryptofunctions") { * }
@@ -12,7 +12,6 @@ class SslConnection is Connection {
 		$sock = IO::Socket::Inet.new($host, $port);
 
 		# server should send certificate immediately...
-		# TODO: experiment with recv() w/ length arg (LWP::Simple just does recv())
 		my $response = $sock.recv();
 
 #........................................
@@ -38,9 +37,11 @@ class SslConnection is Connection {
 	}
 	
 	# prelim
-	method recv() {
+	method recv() returns Response {
 		my $recvd = $sock.recv();
-		return decrypt($recvd,  certificate.getKey(), certificate.getAlg());	
+		my $decrypted = decrypt($recvd, certificate.getKey(), certificate.getAlg());
+		
+		return Response.new($decrypted);
 	}
 }
 

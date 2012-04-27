@@ -1,4 +1,4 @@
-class HeaderSet { #Essentially - a dressed-up hash that makes explicit a set of header fields and their values.
+class LWP::Headers::HeaderSet { #Essentially - a dressed-up hash that makes explicit a set of header fields and their values.
 
 	has %!HeadPairs;
 	
