@@ -1,4 +1,4 @@
-role ResponseExaminer {
+role LWP::Headers::ResponseExaminer {
 
 	#What methods do we put in here that will add to CookieJar?
 	
@@ -6,9 +6,7 @@ role ResponseExaminer {
 	
 	method handleResponse(:$data) {
 		my @fields;
-		my @ftemp;
 		my @values;
-		my @vtemp;
 		
 		my @lines = $data.split("\n"); #Split according to newlines
 		
@@ -21,11 +19,9 @@ role ResponseExaminer {
 			my @parts = $line.split(": "); 
 			
 			if +(@parts) == 2 {
-				@ftemp = @fields;
-				@fields = @(@ftemp, @(@parts[0]));
+				@fields[+(@fields)] = @parts[0];
 				
-				@vtemp = @values;
-				@values = @(@vtemp, @(@parts[1]));
+				@values[+(@values)] = @parts[1];
 			}
 		}
 		

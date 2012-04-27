@@ -1,6 +1,6 @@
 use v6;
 
-class BasicAuthIdentity is Identity {
+class LWP::Headers::BasicAuthIdentity is Identity {
 
 	method new(:$un, :$pw) {
 		

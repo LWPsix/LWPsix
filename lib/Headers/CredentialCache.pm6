@@ -1,9 +1,7 @@
 use v6;
 
-class CredentialCache {
-	#has
+class LWP::Headers::CredentialCache {
 	has Identity %!Identities;	
-	#has
 	
 	method serializeData() { #Turn the identities into a raw string format.
 		my $srl = "";
@@ -18,7 +16,7 @@ class CredentialCache {
 				$srl = $srl ~ "^"; #If not at end, delimit the individual Identities by a caret.
 			}
 		}
-		return $srl; #Return the pure string representing all identities wtihin the cache.
+		return $srl; #Return the pure string representing all identities within the cache.
 	}
 	
 	#deserialize; field to specify 
@@ -36,9 +34,9 @@ class CredentialCache {
 		}
 	}
 	
-	method loadData(:$data) { #how is $data formatted? 
+	#method loadData(:$data) { #how is $data formatted? 
 	
-	}
+	#}
 	
 	method addIdentity(:$identity, :$domain, :$realm) {
 	

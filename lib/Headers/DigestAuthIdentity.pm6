@@ -1,7 +1,7 @@
 use v6;
 use Digest::MD5;
 
-class DigestAuthIdentity is Identity{
+class LWP::Headers::DigestAuthIdentity is Identity{
 
 	method new(:$un, :$pw) {
 		
