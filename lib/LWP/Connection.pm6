@@ -1,4 +1,4 @@
-class Connection {
+class LWP::Connection {
     method send(Str $data) {
         ...  # abstract
     }

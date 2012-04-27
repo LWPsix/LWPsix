@@ -1,6 +1,8 @@
 use v6;
+use LWP::Protocol;
+use LWP::Connection;
 
-class HttpProtocol is Protocol {
+class HTTP::HttpProtocol is Protocol {
     has Examiner @.examiners;
     has Decorator @.decorators;
     has Connection %.connection_for_host;

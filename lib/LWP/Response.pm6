@@ -1,6 +1,6 @@
 use v6;
 
-class Response {
+class LWP::Response {
 	has $.content_type;
 	has $.status;
 	has $.data;
