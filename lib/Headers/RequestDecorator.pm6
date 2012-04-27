@@ -1,4 +1,4 @@
-role LWP::Headers::RequestDecorator {
+role LWPsix::Headers::RequestDecorator {
 
 	#Returns a HeaderSet: 
 	method decorationsForUrl(:@ks, :@vls) {		 #Assuming that this is what we're passed.	
