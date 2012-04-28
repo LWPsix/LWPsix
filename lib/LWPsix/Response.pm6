@@ -7,6 +7,6 @@ class LWPsix::Response {
 
 	# TODO: new() take in response scalar and serialize it into Response object
 	method new(Str $response) {
-		# TODO: bless to create object
+        self.bless(*);
 	}
 }
