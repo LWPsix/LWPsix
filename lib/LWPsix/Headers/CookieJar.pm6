@@ -78,5 +78,42 @@ class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWP
 	
 		%!Cookies{$domain} = $cookie;
 	}
+	
+	#STUBBED METHOD FROM RequestDecorator	
+	
+	# Returns a HeaderSet: 
+	# Assuming that this is what we are passed
+	method decorationsForUrl(:@ks, :@vls) returns LWPsix::Headers::HeaderSet {
+		#return LWPsix::Headers::HeaderSet.new(fields => @ks, values => @vls);
+		
+		# Should the header set return something like, "field", "=value"? 
+		# Easily done, but would it be necessary?
+	}
+	
+	#STUBBED METHOD FROM ResponseExaminer	
+	
+	method handleResponse(Str :$data) {
+		my @fields;
+		my @values;
+		
+		my @lines = $data.split("\n"); #Split according to newlines
+		
+		shift(@lines);
+		for @lines -> $line {
+			
+			# We can't just split on ":", as timestamps have HH:MM:SS format.
+			# With standardized headers from the HTTP response received,
+			# this ensures that we get the label and the contents.			
+			my @parts = $line.split(": "); 
+			
+			if +(@parts) == 2 {
+				@fields[+(@fields)] = @parts[0];
+				
+				@values[+(@values)] = @parts[1];
+			}
+		}
+		
+		return LWPsix::Headers::HeaderSet.new(fields => @fields, values => @values);
+	}
 }
 =end DOG

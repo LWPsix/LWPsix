@@ -3,19 +3,19 @@ use v6;
 use LWP::Headers;
 use Test;
 
-plan 7;
+plan 4;
 
 ### COOKIE, COOKIEJAR
 {
-	my $dat = "Name=example; Expires=Tue, 01 May 2012 15:30:30 GMT; Domain=LWPsixdemo.com;"
-	my $cj = CookieJar.new();
-	my $ck = Cookie.new();
-	$ck.parse($dat);
-	lives_ok { $cj.addCookie( cookie => $ck, domain => "LWPsixdemo.com")}, 'Adding cookie to jar successful';
-	my $cjs = $cj.serializeAllData();
-	is $cjs ~~ Str, True, 'Data serialize works';
-	my $cj2 = CookieJar.new();
-	lives_ok { $cj2.deserializeData($cjs)}, 'recreating CookieJar from serialized string successful';
+	#my $dat = "Name=example; Expires=Tue, 01 May 2012 15:30:30 GMT; Domain=LWPsixdemo.com;"
+	#my $cj = CookieJar.new();
+	#my $ck = Cookie.new();
+	#$ck.parse($dat);
+	#lives_ok { $cj.addCookie( cookie => $ck, domain => "LWPsixdemo.com")}, 'Adding cookie to jar successful';
+	#my $cjs = $cj.serializeAllData();
+	#is $cjs ~~ Str, True, 'Data serialize works';
+	#my $cj2 = CookieJar.new();
+	#lives_ok { $cj2.deserializeData($cjs)}, 'recreating CookieJar from serialized string successful';
 
 }
 
