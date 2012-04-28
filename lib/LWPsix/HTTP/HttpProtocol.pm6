@@ -1,4 +1,3 @@
-use v6;
 use LWPsix::Response;
 use LWPsix::Protocol;
 use LWPsix::Connection;
@@ -11,7 +10,7 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
     has LWPsix::Connection %.connection_for_host;
     #has ProxyServer $.proxy;
 
-  method request(Str $url, Str $method = 'GET') returns LWPsix::Response {
+  method request(Str $url, Str $:method = 'GET') returns LWPsix::Response {
         # TODO: separate $url's components
         # "GET /index.html HTTP/1.0" is the request you send to a web server,
         # "GET http://www.linuxquestions.org/index.html HTTP/1.0" is the one you
@@ -28,17 +27,15 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
 		# TODO: support redirects and add a max-redirects
         # TODO: recv ALL the bytes
 
-        my $resp = $connection.recv();
+        my Response $resp .= new: $connection.recv();
         return $resp;
     }
 
-    method get_connection(Str $url) returns LWPsix::Connection {
+    method get_connection(Str $service) returns LWPsix::Connection {
         # TODO: proxies
 
-        my ($host, $port) = $url.split(":");
-	if ! $port.defined {
-            $port = 80;
-        }
+        my ($host, $port) = $service.split(":", 2);
+        # TODO: error-check the above; default to 80
 
 =begin WEAREJUSTGONNADOONESHOTFORNOW
         # TODO: kill if not keepalive
@@ -49,12 +46,6 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
         return %.connection_for_host{$host};
 =end WEAREJUSTGONNADOONESHOTFORNOW
 
-        return .new_connection($host, $port);
-    }
-
-    method new_connection(Str $host, Str $port) returns LWPsix::Connection {
         return LWPsix::ConcreteConnection.new($host, $port);
     }
-  
 }
-
