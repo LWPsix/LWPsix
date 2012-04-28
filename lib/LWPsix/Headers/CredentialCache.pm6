@@ -1,7 +1,8 @@
 use v6;
+use LWPsix::Headers::Identity;
 
 class LWPsix::Headers::CredentialCache {
-	has Identity %!Identities;	
+	has LWP::Headers::Identity %!Identities;	
 	
 	method serializeData() { #Turn the identities into a raw string format.
 		my $srl = "";
