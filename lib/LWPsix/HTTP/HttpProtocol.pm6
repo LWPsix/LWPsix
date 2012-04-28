@@ -6,8 +6,8 @@ use LWPsix::Headers::ResponseExaminer;
 use LWPsix::Headers::RequestDecorator;
 
 class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
-    has LWPsix::Headers::ResponseExaminer @.examiners;
-    has LWPsix::Headers::RequestDecorator @.decorators;
+    #has LWPsix::Headers::ResponseExaminer @.examiners;
+    #has LWPsix::Headers::RequestDecorator @.decorators;
     has LWPsix::Connection %.connection_for_host;
     #has ProxyServer $.proxy;
 

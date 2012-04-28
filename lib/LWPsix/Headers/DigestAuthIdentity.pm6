@@ -1,13 +1,15 @@
 use v6;
-use Digest::MD5;
+use LWPsix::Headers::Identity;
+use Dependencies::Digest::MD5;
 
-class LWPsix::Headers::DigestAuthIdentity is Identity{
+class LWPsix::Headers::DigestAuthIdentity is LWPsix::Headers::Identity {
 
 	method new(:$un, :$pw) {
 		
 		self.bless(*, 
-					security => True, 					#Indicate (for serialization purposes) that this is secure.
-					username => md5_hex($un), password => md5_hex($pw)); 	#Encrypt username and password before storing.
+			security => True, #Indicate that this is secure.
+			username => Dependencies::Digest::MD5::auth::md5_hex($un), 
+			password => Dependencies::Digest::MD5::auth::md5_hex($pw)); #Encrypt username and password before storing.
 		
 	}
 	

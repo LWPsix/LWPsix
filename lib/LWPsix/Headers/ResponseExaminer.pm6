@@ -1,3 +1,7 @@
+use v6;
+use LWPsix::Headers::HeaderSet;
+
+
 role LWPsix::Headers::ResponseExaminer {
 
 	#What methods do we put in here that will add to CookieJar?
@@ -25,7 +29,7 @@ role LWPsix::Headers::ResponseExaminer {
 			}
 		}
 		
-		#return HeaderSet.new(fields => @fields, values => @values);
+		return LWPsix::Headers::HeaderSet.new(fields => @fields, values => @values);
 	}
 
 }

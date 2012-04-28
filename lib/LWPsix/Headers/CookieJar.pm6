@@ -2,8 +2,13 @@ use v6;
 use LWPsix::Headers::ResponseExaminer;
 use LWPsix::Headers::RequestDecorator;
 use LWPsix::Headers::Cookie;
+use LWPsix::Headers::HeaderSet;
 
-class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWPsix::Headers::RequestDecorator	{
+# The errors I get seem to have to do with roles...  although they persist when
+# I comment out the "does" stuff...  Idk.  Just commenting this out so you can play around with it.
+
+=begin DOG
+class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWPsix::Headers::RequestDecorator {
 	has LWPsix::Headers::Cookie %!Cookies; 
 
 
@@ -32,8 +37,9 @@ class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWP
 		return $ser;
 	
 	}
-	
-	method serializeAllData() returns Str { #serialize all cookies in the CookieJar
+
+	# serialize all cookies in the CookieJar	
+	method serializeAllData() returns Str { 
 	
 		my $ser = "";
 		my $size = +(%!Cookies.kvs);
@@ -51,7 +57,7 @@ class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWP
 		return $ser;	
 	}
 	
-	method deserializeData(String $data) {
+	method deserializeData(Str $data) {
 	
 		my @pairs = $data.split("&");
 		
@@ -61,7 +67,7 @@ class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWP
 		}
 	}
 	
-	method loadData(String $data) { 
+	method loadData(Str $data) { 
 	
 		#Parse and add cookies as needed from a dumped string: should it be the "Cookie: ..." field-value pair in string form? 
 		#Or is this deserialization?
@@ -72,6 +78,5 @@ class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWP
 	
 		%!Cookies{$domain} = $cookie;
 	}
-	
-
 }
+=end DOG

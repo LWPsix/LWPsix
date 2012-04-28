@@ -1,16 +1,17 @@
 use v6;
 use LWPsix::Headers::Identity;
+use LWPsix::Headers::IdentityMaker;
 
 class LWPsix::Headers::CredentialCache {
-	has LWP::Headers::Identity %!Identities;	
+	has LWPsix::Headers::Identity %!Identities;	
 	
 	method serializeData() { #Turn the identities into a raw string format.
 		my $srl = "";
-		my $size = +(%Identities); #Forced numeric context gives the size in terms of k-v pairs.
-		my $ind = 0; "index" of the key-value pair.		
+		my $size = +(%!Identities); #Forced numeric context gives the size in terms of k-v pairs.
+		my $ind = 0; # "index" of the key-value pair.		
 			
 		#Zip the keys and values to work with them a pair at a time.
-		for zip(%Identities.keys, %Identities.values) -> $k, $v { 
+		for zip(%!Identities.keys, %!Identities.values) -> $k, $v { 
 			$srl = $srl ~ $k ~ "&" ~ $v.raw(); #Separate by ampersand. Identity has its own delimiter via $IDEN.raw() .
 			
 			if $ind < $size {
@@ -31,7 +32,7 @@ class LWPsix::Headers::CredentialCache {
 			# @pcs[0] = $domain|$realm and parseMake will recreate the appropriate
 			# identity based on the raw data of the serialized identity.			
 			
-			%Identities{@pcs[0]} = IdentityMaker.parseMake(@pcs[1]);  
+			%!Identities{@pcs[0]} = LWPsix::Headers::IdentityMaker.parseMake(@pcs[1]);  
 		}
 	}
 	
@@ -41,7 +42,7 @@ class LWPsix::Headers::CredentialCache {
 	
 	method addIdentity(:$identity, :$domain, :$realm) {
 	
-		%Identities{$domain~"|"~$realm} = $identity;
+		%!Identities{$domain~"|"~$realm} = $identity;
 		
 		#Messy, but allows access more easily.
 		#Previously attempted to have an array of 
@@ -57,12 +58,12 @@ class LWPsix::Headers::CredentialCache {
 	
 		# If the $domain~"|"~$realm key does not give an Identity back,
 		# can use this structure to handle:
-		#if %Identities{$domain~"|"~$realm} ~~ Identity { #If the returned object is of type Identity
+		#if %!Identities{$domain~"|"~$realm} ~~ Identity { #If the returned object is of type Identity
 		#	Handle proper operations in this space, and an else for otherwise
 		#	}
 	
 		
-		return %Identities{$domain~"|"~$realm};	#Returns Any() if not existent.
+		return %!Identities{$domain~"|"~$realm};	#Returns Any() if not existent.
 	
 	}
 	

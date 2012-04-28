@@ -1,6 +1,8 @@
 use v6;
 
-class LWPsix::Headers::HeaderSet { #Essentially - a dressed-up hash that makes explicit a set of header fields and their values.
+# Essentially, a dressed-up hash that makes explicit a set of header fields and
+# their values.
+class LWPsix::Headers::HeaderSet {
 
 	has %!HeadPairs;
 	
@@ -10,11 +12,12 @@ class LWPsix::Headers::HeaderSet { #Essentially - a dressed-up hash that makes e
 			%hp{$f} = $v;
 		}
 		
-		self.bless(*, %!HeadPairs => %hp);
+		return self.bless(*, %!HeadPairs => %hp);
 		
 	}
 	
-	method get($field) { #Retrieve the value associated with a header field within the HeaderSet.
+	# Retrieve the value associated w/ a header field within the HeaderSet.
+	method get($field) {
 		return %!HeadPairs{$field};
 	}
 
