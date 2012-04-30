@@ -18,6 +18,7 @@ class LWPsix::Headers::Cookie {
         my @fvs = $header.split("; ");
         for @fvs -> $line {
         	my @pairing = $line.split("=");
+        	if @pairing[0] ne "Domain":
         	%cook-fields{@pairing[0]} = @pairing[1];
         }
     }
