@@ -4,6 +4,6 @@ use LWPsix::Headers::HeaderSet;
 
 role LWPsix::Headers::ResponseExaminer {
 	
-	method handleResponse(Str :$data) is abstract;
+	method handleResponse(Str :$data) {...};
 
 }

@@ -5,5 +5,5 @@ role LWPsix::Headers::RequestDecorator {
 
 	# Returns a HeaderSet: 
 	# Assuming that this is what we are passed
-	method decorationsForUrl(:@ks, :@vls) is abstract;
+	method decorationsForUrl(:@ks, :@vls) {...};
 }
