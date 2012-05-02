@@ -2,9 +2,6 @@ use v6;
 use LWPsix::Protocol;
 
 class LWPsix::UserAgent {
-    # Wouldn't it make more sense for a UserAgent to have one protocol, and the
-    # user to make different agents for different protocols? Not even a little
-    # bit.
     my LWPsix::Protocol %!protocols;
 
     method new() {
@@ -12,13 +9,16 @@ class LWPsix::UserAgent {
         # TODO: populates protocols according to parameters
     }
 
-    # TODO: accept arbitrary params
+    # TODO: accept arbitrary params OR formalize format for requests
     method request(Str $url) returns LWPsix::Response {
-        ...
         my Str ($scheme, $path) = $url.split: <:>, 2;
         # TODO: error-check the above
+		
         my LWPsix::Protocol $proto = %!protocols{$scheme};
-        # TODO: error-check the above
+		if ! $proto.defined {
+			# TODO: match $scheme to some class within library
+		}
+
         return $proto.request: $path;
     }
 }

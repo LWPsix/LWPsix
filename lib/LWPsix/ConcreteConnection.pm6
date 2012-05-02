@@ -24,8 +24,3 @@ class LWPsix::ConcreteConnection { #is Connection {
 		$!sock.close();
 	}
 }
-
-my LWPsix::ConcreteConnection $con .= new("localhost", 1337);
-$con.send("hello there!\n");
-say $con.recv();
-
