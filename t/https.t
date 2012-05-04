@@ -1,7 +1,7 @@
 use v6;
 use Test;
-use LWPsix::HttpsProtocol;
+use LWPsix::HTTPS::HttpsProtocol;
 
 say "running HTTPS test suite..."
-my LWPsix::HttpsProtocol $proto .= new(); # no args for now
+my LWPsix::HTTPS::HttpsProtocol $proto .= new(); # no args for now
 

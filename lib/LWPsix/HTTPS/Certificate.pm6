@@ -1,5 +1,5 @@
 use v6;
-use NativeCall;
+use Dependencies::NativeCall;
 use LWPsix::HTTPS::CertificateValidator;
 use LWPsix::HTTPS::TrustingCertificateValidator;
 

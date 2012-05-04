@@ -1,8 +1,9 @@
 use v6;
 use LWPsix::Protocol;
+use LWPsix::Response;
 
 class LWPsix::UserAgent {
-    my LWPsix::Protocol %!protocols;
+    my LWPsix::Protocol %protocols; # compiler nixed ! twigil - mel
 
     method new() {
         self.bless(*);
@@ -14,7 +15,7 @@ class LWPsix::UserAgent {
         my Str ($scheme, $path) = $url.split: <:>, 2;
         # TODO: error-check the above
 		
-        my LWPsix::Protocol $proto = %!protocols{$scheme};
+        my LWPsix::Protocol $proto = %protocols{$scheme};
 		if ! $proto.defined {
 			# TODO: match $scheme to some class within library
 		}

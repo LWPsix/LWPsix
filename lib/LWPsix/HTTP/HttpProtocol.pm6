@@ -10,7 +10,7 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
     has LWPsix::Connection %.connection_for_host;
     #has ProxyServer $.proxy;
 
-  method request(Str $url, Str $:method = 'GET') returns LWPsix::Response {
+  method request(Str $url, Str :$method = 'GET') returns LWPsix::Response {
         # TODO: separate $url's components
         # "GET /index.html HTTP/1.0" is the request you send to a web server,
         # "GET http://www.linuxquestions.org/index.html HTTP/1.0" is the one you
@@ -27,7 +27,7 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
 		# TODO: support redirects and add a max-redirects
         # TODO: recv ALL the bytes
 
-        my Response $resp .= new: $connection.recv();
+        my LWPsix::Response $resp .= new: $connection.recv();
         return $resp;
     }
 
