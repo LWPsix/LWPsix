@@ -5,21 +5,24 @@ use LWPsix::Connection;
 use LWPsix::HTTPS::Certificate;
 
 class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
+	has Int $.verbose;
 	has $.sock;
 	has LWPsix::HTTPS::Certificate $certificate;
 
 	sub encrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
 	sub decrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
 
-	method new(Str $host, Int $port) {
+	method new(Str $host, Int $port, Int $v) {
+		$.verbose = $v;		
+
 		$.sock = IO::Socket::Inet.new($host, $port);
 
-		# server should send certificate immediately...
+		# Server should send certificate immediately...
 		my Str $response = $.sock.recv();
 
 		$certificate = LWPsix::HTTPS::Certificate.new($response);
 
-		return self.bless(*, $.sock, $certificate);
+		return self.bless(*, $.verbose, $.sock, $certificate);
 	}
 
 	# prelim ... no error checking etc.

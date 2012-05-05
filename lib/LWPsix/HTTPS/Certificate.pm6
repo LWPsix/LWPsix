@@ -19,13 +19,8 @@ class LWPsix::HTTPS::Certificate {
 			$validator = LWPsix::HTTPS::TrustingCertificateValidator.new();
 		}
 		$!keyInfo = extractKeyInfo($rawCert);
-		
-#........................................
-		say "raw = $.raw";
-		say "keyInfo = $!keyInfo";
-#........................................
 
-		return self.bless($.raw, $validator, $!keyInfo);
+		return self.bless(*, $.raw, $validator, $!keyInfo);
 	}
 	
 	method validate() {
