@@ -18,34 +18,39 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
 
         my Str @lines;
         @lines.push: "{$method} {$url} HTTP/1.1";
+		say "Constructing $method request for $url..."
         # TODO: Decorators
-        my Str $request = @lines.join: "\r\n";
+		say "Adding request decorators..."
 
+        my Str $request = @lines.join: "\r\n";
+		
+		say "Accessing socket..."
         my LWPsix::Connection $connection = .get_connection($url);
+		say "Sending request..."
         $connection.send($request);
 
 		# TODO: support redirects and add a max-redirects
-        # TODO: recv ALL the bytes
-
+	
         my LWPsix::Response $resp .= new: $connection.recv();
+		say "Received a response from $url!"
         return $resp;
     }
 
     method get_connection(Str $service) returns LWPsix::Connection {
         # TODO: proxies
-
+		
         my ($host, $port) = $service.split(":", 2);
         # TODO: error-check the above; default to 80
 
-=begin WEAREJUSTGONNADOONESHOTFORNOW
+=begin keepalive
         # TODO: kill if not keepalive
         if !%.connection_for_host{$host} {
             my Connection $connection .= new: $host, $port;
             %.connection_for_host{$host} = $connection;
         }
         return %.connection_for_host{$host};
-=end WEAREJUSTGONNADOONESHOTFORNOW
-
+=end keepalive
+		say "No keep-alive; creating new connection..."
         return LWPsix::ConcreteConnection.new($host, $port);
     }
 }

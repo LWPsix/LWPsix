@@ -4,6 +4,7 @@ class LWPsix::ConcreteConnection { #is Connection {
 	method new(Str $host, Int $port) {
         self.bless(*);
 		$!sock .= new($host, $port);
+		say "Created new socket for $host on port $port...";
 	}
 
     method send(Str $req) {
@@ -12,6 +13,7 @@ class LWPsix::ConcreteConnection { #is Connection {
 		if ! $status {
 			$status = $!sock.send($req);
 		}
+		say "Sent $req over socket!";
 	}
 
     method recv() {
