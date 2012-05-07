@@ -4,11 +4,12 @@ use LWPsix::HTTP::HttpProtocol;
 use LWPsix::Response;
 
 class LWPsix::UserAgent {
-    my LWPsix::Protocol %protocols; # compiler nixed ! twigil - mel
+    # TODO: type the protocol hash to Str => LWPsix::Protocol
+    my %protocols; # compiler nixed ! twigil - mel
 
     method new() {
         self.bless(*);
-		%protocols{"http"} .= LWPsix::HTTP::HttpProtocol.new();
+		%protocols{"http"} = LWPsix::HTTP::HttpProtocol.new;
 	}
 	# TODO: multi method new() populates protocols according to parameters
 
@@ -22,6 +23,6 @@ class LWPsix::UserAgent {
 			# TODO: match $scheme to some class within library
 		}
 
-        return $proto.request: $path;
+        return $proto.request($path);
     }
 }

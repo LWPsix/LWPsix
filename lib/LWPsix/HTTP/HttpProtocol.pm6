@@ -10,6 +10,11 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
     has LWPsix::Connection %.connection_for_host;
     #has ProxyServer $.proxy;
 
+	method new()
+	{
+		self.bless(*);
+	}
+
   method request(Str $url, Str :$method = 'GET') returns LWPsix::Response {
         # TODO: separate $url's components
         # "GET /index.html HTTP/1.0" is the request you send to a web server,
