@@ -1,5 +1,6 @@
 use v6;
 use LWPsix::Protocol;
+use LWPsix::HTTP::HttpProtocol;
 use LWPsix::Response;
 
 class LWPsix::UserAgent {
@@ -7,8 +8,9 @@ class LWPsix::UserAgent {
 
     method new() {
         self.bless(*);
-        # TODO: populates protocols according to parameters
-    }
+		%protocols{"http"} .= LWPsix::HTTP::HttpProtocol.new();
+	}
+	# TODO: multi method new() populates protocols according to parameters
 
     # TODO: accept arbitrary params OR formalize format for requests
     method request(Str $url) returns LWPsix::Response {
