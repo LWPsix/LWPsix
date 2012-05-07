@@ -11,17 +11,34 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
     #has ProxyServer $.proxy;
 
   method request(Str $url, Str :$method = 'GET') {
+	my $sep = $url.index("/");
+	my $host;
+	my $file;
+
+	# default to root directory
+	if ! $sep.defined {
+		$host = $url;
+		$file = "/";
+	}
+	else {
+		$host = substr($url, 0, $url.index("/"));	
+		$file = substr($url, $url.index("/"));
+	}
+
         my Str @lines;
-        @lines.push: "{$method} {$url} HTTP/1.1";
-		say "Constructing $method request for $url...";
+        @lines.push: "{$method} {$file} HTTP/1.1";
+	@lines.push: "Host: {$host}";
+	@lines.push: "Connection: close";
+
+	say "Constructing $method request for $url...";
         # TODO: Decorators
-		say "Adding request decorators...";
+	say "Adding request decorators...";
 
         my Str $request = @lines.join: "\r\n";
 		
-		say "Accessing socket...";
+	say "Accessing socket...";
         #my LWPsix::ConcreteConnection $connection = LWPsix::HTTP::HttpProtocol.get_connection($url);
-	my $connection = IO::Socket::INET.new(host => $url);	
+	my $connection = IO::Socket::INET.new(host => $host);	
 	say "Sending request...";
 	say $request;
         $connection.send($request ~ "\n\n");
