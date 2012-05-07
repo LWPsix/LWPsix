@@ -14,7 +14,7 @@ class LWPsix::Response {
 
 		my @resp = $response.lines;
 
-		$.status .=  (@resp[0].words)[1];
+		$.status = (@resp[0].words)[1];
 		say "Status code: $.status";
 
 		say "Processing response headers...";
@@ -24,7 +24,7 @@ class LWPsix::Response {
 			# once we hit the empty line, we've got the message body
 			last if $line.words.elems == 0; 
 			if $line.words[0] ~~ "Content-Type:" {
-				$.content_type .= $line.words[1];
+				$.content_type = $line.words[1];
 				say "Received $.content_type type of content";
 			}
 
@@ -34,7 +34,7 @@ class LWPsix::Response {
 		}
 
 		# a ..^ b == a .. b - 1
-		$data .= @resp.[$end_range ..^ @resp.elems];
+		$.data = @resp.[$end_range ..^ @resp.elems];
 	}
 
 =begin FORMAT

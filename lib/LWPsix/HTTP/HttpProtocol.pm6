@@ -18,21 +18,21 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
 
         my Str @lines;
         @lines.push: "{$method} {$url} HTTP/1.1";
-		say "Constructing $method request for $url..."
+		say "Constructing $method request for $url...";
         # TODO: Decorators
-		say "Adding request decorators..."
+		say "Adding request decorators...";
 
         my Str $request = @lines.join: "\r\n";
 		
-		say "Accessing socket..."
+		say "Accessing socket...";
         my LWPsix::Connection $connection = .get_connection($url);
-		say "Sending request..."
+		say "Sending request...";
         $connection.send($request);
 
 		# TODO: support redirects and add a max-redirects
 	
         my LWPsix::Response $resp .= new: $connection.recv();
-		say "Received a response from $url!"
+		say "Received a response from $url!";
         return $resp;
     }
 
@@ -50,7 +50,7 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
         }
         return %.connection_for_host{$host};
 =end keepalive
-		say "No keep-alive; creating new connection..."
+		say "No keep-alive; creating new connection...";
         return LWPsix::ConcreteConnection.new($host, $port);
     }
 }
