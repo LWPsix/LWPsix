@@ -9,7 +9,6 @@ class LWPsix::Response {
 	# TODO: new() take in response scalar and serialize it into Response object
 	method new(Str $response) {
 		#We're assuming HTML responses
-        self.bless(*);
 		say "Serializing response...";
 
 		my @resp = $response.lines;
@@ -35,6 +34,7 @@ class LWPsix::Response {
 
 		# a ..^ b == a .. b - 1
 		$.data = @resp.[$end_range ..^ @resp.elems];
+        self.bless(*);
 	}
 
 =begin FORMAT

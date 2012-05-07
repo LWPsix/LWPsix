@@ -5,24 +5,28 @@ use LWPsix::Response;
 
 class LWPsix::UserAgent {
     # TODO: type the protocol hash to Str => LWPsix::Protocol
-    my %protocols; # compiler nixed ! twigil - mel
+    my %.protocols; # compiler nixed ! twigil - mel
 
     method new() {
         self.bless(*);
-		%protocols{"http"} = LWPsix::HTTP::HttpProtocol.new;
 	}
 	# TODO: multi method new() populates protocols according to parameters
 
     # TODO: accept arbitrary params OR formalize format for requests
-    method request(Str $url) returns LWPsix::Response {
-        my Str ($scheme, $path) = $url.split: <:>, 2;
+    method request(Str $url) {
+        my ($scheme, $path) = $url.split: <:>, 2;
         # TODO: error-check the above
-		
-        my LWPsix::Protocol $proto = %protocols{$scheme};
+	# defaulting to http
+	say "Sending request to $url via HttpProtocol...";
+	
+	return LWPsix::HTTP::HttpProtocol.request($url);
+=begin fix		
+        my LWPsix::Protocol $proto = %.protocols{$scheme};
 		if ! $proto.defined {
 			# TODO: match $scheme to some class within library
 		}
-
         return $proto.request($path);
+=end fix
     }
 }
+

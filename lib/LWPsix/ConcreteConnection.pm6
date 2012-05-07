@@ -1,10 +1,12 @@
-class LWPsix::ConcreteConnection { #is Connection {
-	has IO::Socket::INET $!sock;
+use v6;
+
+class LWPsix::ConcreteConnection {
+	has IO::Socket::INET $sock;
 
 	method new(Str $host, Int $port) {
-        self.bless(*);
-		$!sock .= new($host, $port);
-		say "Created new socket for $host on port $port...";
+	say "Created new socket for $host on port $port...";
+	$sock = IO::Socket::INET.new(:$host);
+	self.bless(*);
 	}
 
     method send(Str $req) {
