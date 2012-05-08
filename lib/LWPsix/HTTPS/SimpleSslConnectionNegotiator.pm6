@@ -9,7 +9,8 @@ class LWPsix::HTTPS::SimpleSslConnectionNegotiator is LWPsix::HTTPS::SslConnecti
 
 	method new($s) {
 		$!sock = $s;
-		$!cert = undef;
+
+		self.bless(*, $!cert, $!sock);
 	}
 
 	method negotiate() returns Int {
@@ -24,7 +25,7 @@ class LWPsix::HTTPS::SimpleSslConnectionNegotiator is LWPsix::HTTPS::SslConnecti
 		}
 
 		if (.establishKey()) {
-			say 'Problem changing cipher suite.'
+			say 'Problem changing cipher suite.';
 			return 1; # or specific error code
 		}
 

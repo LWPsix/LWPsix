@@ -3,41 +3,46 @@ use Dependencies::NativeCall;
 use LWPsix::Response;
 use LWPsix::Connection;
 use LWPsix::HTTPS::Certificate;
+use LWPsix::HTTPS::SslConnectionNegotiator;
 
 class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
-=begin fix
 	has Int $.verbose;
 	has $.sock;
+	has LWPsix::HTTPS::SslConnectionNegotiator $negotiator;
 	has LWPsix::HTTPS::Certificate $certificate;
 
-	sub encrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
-	sub decrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
+#	sub encrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
+#	sub decrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
 
-	method new(Str $host, Int $port, Int $v) {
+	method new(Int $v, Str $host, Int $port) {
 		$.verbose = $v;		
 
 		$.sock = IO::Socket::Inet.new($host, $port);
 
-		# Server should send certificate immediately...
-		my Str $response = $.sock.recv();
+		# Call negotiator, which does the handshake work.
+		if ($negotiator.negotiate()) {
+			say "Failure opening SSL connection.";
+		}
 
-		$certificate = LWPsix::HTTPS::Certificate.new($response);
+		$certificate = $negotiator.getCertificate();
 
-		return self.bless(*, $.verbose, $.sock, $certificate);
+		return self.bless(*, $.verbose, $.sock, $negotiator, $certificate);
 	}
 
-	# prelim ... no error checking etc.
 	method send(Str $req) {
-		my Str $toSend = encrypt($req, $certificate.getKey(), $certificate.getAlg());
-		my $status = 500; # for testing
+		my Str $toSend = '';
+
+		#$toSend = encrypt($req, $certificate.getKey(), $certificate.getAlg());
+
+		my $status = 500;
 		$status = $.sock.send($toSend);
 
 	}
 	
-	# prelim
 	method recv() returns LWPsix::Response {
 		my Str $recvd = $.sock.recv();
-		my Str $decrypted = decrypt($recvd, $certificate.getKey(), $certificate.getAlg());
+		my Str $decrypted = '';
+		#$decrypted = decrypt($recvd, $certificate.getKey(), $certificate.getAlg());
 		
 		return LWPsix::Response.new($decrypted);
 	}
@@ -45,6 +50,5 @@ class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
 	method kill() {
 		$.sock.close();
 	}
-=end fix
 }
 
