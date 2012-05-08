@@ -5,6 +5,7 @@ use LWPsix::Connection;
 use LWPsix::HTTPS::Certificate;
 
 class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
+=begin fix
 	has Int $.verbose;
 	has $.sock;
 	has LWPsix::HTTPS::Certificate $certificate;
@@ -44,5 +45,6 @@ class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
 	method kill() {
 		$.sock.close();
 	}
+=end fix
 }
 

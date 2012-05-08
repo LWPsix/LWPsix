@@ -1,9 +1,12 @@
-class LWPsix::ConcreteConnection { #is Connection {
-	has IO::Socket::INET $!sock;
+use v6;
+
+class LWPsix::ConcreteConnection {
+	has IO::Socket::INET $sock;
 
 	method new(Str $host, Int $port) {
-        self.bless(*);
-		$!sock .= new($host, $port);
+	say "Created new socket for $host on port $port...";
+	$sock = IO::Socket::INET.new(:$host);
+	self.bless(*);
 	}
 
     method send(Str $req) {
@@ -12,6 +15,7 @@ class LWPsix::ConcreteConnection { #is Connection {
 		if ! $status {
 			$status = $!sock.send($req);
 		}
+		say "Sent $req over socket!";
 	}
 
     method recv() {

@@ -1,5 +1,6 @@
 use v6;
 
+#We're really just assuming HTML message format responses, perhaps rename and move this class?
 class LWPsix::Response {
 	has $.content_type;
 	has $.status;
@@ -7,15 +8,33 @@ class LWPsix::Response {
 
 	# TODO: new() take in response scalar and serialize it into Response object
 	method new(Str $response) {
+		#We're assuming HTML responses
+		say "Serializing response...";
+
+		my @resp = $response.lines;
+
+		$.status = (@resp[0].words)[1];
+		say "Status code: $.status";
+
+		say "Processing response headers...";
+		my $end_range;
+
+		for @resp -> $line {
+			# once we hit the empty line, we've got the message body
+			last if $line.words.elems == 0; 
+			if $line.words[0] ~~ "Content-Type:" {
+				$.content_type = $line.words[1];
+				say "Received $.content_type type of content";
+			}
+
+			# TODO: serialize headers
+
+			$end_range++;
+		}
+
+		# a ..^ b == a .. b - 1
+		$.data = @resp.[$end_range ..^ @resp.elems];
         self.bless(*);
-=begin PARSING
-		my $resp = $response.lines;
-		$.status .= parse first line and retrieve 3-digit code
-		for loop through rest of $resp
-			if "Content-Type", set $.content_type
-			if empty line, break
-		set $data to whatever is in message body
-=end PARSING				
 	}
 
 =begin FORMAT

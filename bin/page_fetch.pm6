@@ -1,28 +1,46 @@
 use v6;
 use LWPsix::UserAgent;
 
-# Demo
+my $ua = LWPsix::UserAgent.new; # default useragent with just HttpProtocol
+say "No parameters--reverting to default UserAgent settings...";
 
 my $host = prompt "URL: ";
 
-my $ua = LWP::UserAgent.new; # default useragent with just HttpProtocol
-my $resp = $ua.request("http://google.com/");
+my $response = $ua.request($host);
 
-# TODO: print out headers/results of response
+say "Serializing response...";
 
-$resp = $ua.request("GET", "http://google.com/");
+my @resp = $response.lines;
+my $status;
+my $content_type;
+my $data;
 
-# TODO: request decorators/response examiners
+$status = (@resp[0].words)[1];
+say "Status code: $status";
 
-# TODO: MOAR protocols
-Proxy
-HTTPs
+say "Processing response headers...";
+my $end_range;
 
-$ua = LWP::UserAgent.new: 
+for @resp -> $line {
+	# once we hit the empty line, we've got the message body
+	last if $line.words.elems == 0; 
+	if $line.words[0] ~~ "Content-Type:" {
+		$content_type = $line.words[1];
+		say "Received $content_type type of content";
+	}
+		# TODO: serialize headers
+		$end_range++;
+}
 
-# TODO: pipe to lynx
-say $resp;
+# a ..^ b == a .. b - 1
+$data = @resp.[$end_range ..^ @resp.elems].join("\n");
 						
+my $fh = open("output.html", :w);
+unless $fh.defined {
+	die "Could not export response from server!";
+}
 
-# TODO: download utility
+$fh.say($data);
+$fh.close;
 
+# TODO: Execute Lynx on output.html
