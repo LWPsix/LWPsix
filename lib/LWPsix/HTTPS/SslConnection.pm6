@@ -11,8 +11,8 @@ class LWPsix::HTTPS::SslConnection is LWPsix::Connection {
 	has LWPsix::HTTPS::SslConnectionNegotiator $negotiator;
 	has LWPsix::HTTPS::Certificate $certificate;
 
-#	sub encrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
-#	sub decrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
+	sub encrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
+	sub decrypt(Str, Str, Int) returns Str is native("cryptofunctions") { * }
 
 	method new(Int $v, Str $host, Int $port) {
 		$.verbose = $v;		

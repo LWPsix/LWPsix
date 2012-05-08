@@ -106,7 +106,7 @@ my role Native[Routine $r, Str $libname] {
             nqp::getattr(nqp::p6decont($args), Capture, '$!list'))
     }
 }
-
+   
 # Role for carrying extra calling convention information.
 my role NativeCallingConvention[$name] {
     method native_call_convention() { $name };

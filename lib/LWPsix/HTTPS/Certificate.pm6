@@ -8,18 +8,15 @@ class LWPsix::HTTPS::Certificate {
 	has	LWPsix::HTTPS::CertificateValidator $validator;	# validator
 	has Str $!keyInfo;						# algorithm/key
 
-	sub extractKeyInfo(Str) returns Str is native('cryptofunctions') { * }
+	# Unfortunately, until a Rakudo bug involving parametric roles is fixed,
+	# we can't have a native call in this class *and* in SslConnection:
+#	sub extractKeyInfo(Str) returns Str is native("simplecrypto") { * }
 
 	method new(Str $rawCert, LWPsix::HTTPS::CertificateValidator $val) {
 		$.raw = $rawCert;
-#		if (defined($val)) {
-			$validator = $val;
-#		}
-#		else {
-#			$validator = LWPsix::HTTPS::TrustingCertificateValidator.new();
-#		}
+		$validator = $val;
 
-		$!keyInfo = extractKeyInfo($rawCert);
+#		$!keyInfo = extractKeyInfo($rawCert);
 
 		return self.bless(*, $.raw, $validator, $!keyInfo);
 	}

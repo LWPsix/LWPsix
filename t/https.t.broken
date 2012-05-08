@@ -1,0 +1,8 @@
+use Test;
+use LWPsix::HTTPS::HttpsProtocol;
+
+say "running HTTPS test suite..."
+my LWPsix::HTTPS::HttpsProtocol $proto .= new($verbose=>1);
+ok $proto.can('request'), 'proto can request';
+
+done; 
