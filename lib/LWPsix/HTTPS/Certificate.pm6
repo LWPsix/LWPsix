@@ -10,14 +10,15 @@ class LWPsix::HTTPS::Certificate {
 
 	sub extractKeyInfo(Str) returns Str is native('cryptofunctions') { * }
 
-	method new(Str $rawCert, LWPsix::HTTPS::CertificateValidator $val?) {
+	method new(Str $rawCert, LWPsix::HTTPS::CertificateValidator $val) {
 		$.raw = $rawCert;
-		if (defined($val)) {
+#		if (defined($val)) {
 			$validator = $val;
-		}
-		else {
-			$validator = LWPsix::HTTPS::TrustingCertificateValidator.new();
-		}
+#		}
+#		else {
+#			$validator = LWPsix::HTTPS::TrustingCertificateValidator.new();
+#		}
+
 		$!keyInfo = extractKeyInfo($rawCert);
 
 		return self.bless(*, $.raw, $validator, $!keyInfo);

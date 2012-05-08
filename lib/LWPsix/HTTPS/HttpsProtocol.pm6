@@ -8,7 +8,8 @@ use LWPsix::Headers::RequestDecorator;
 
 class LWPsix::HTTPS::HttpsProtocol is LWPsix::Protocol {
 	has Int $.verbose = 0;
-	#has LWPsix::Connection %.connection_for_host;
+	has LWPsix::HTTPS::SslHandshakeNegotiator $negotiator; 
+	has LWPsix::Connection %.connection_for_host;
 	#has LWPsix::Headers::ResponseExaminer @.examiners;
 	#has LWPsix::Headers::RequestDecorator @.decorators;
 
