@@ -4,9 +4,7 @@ use LWPsix::Headers::RequestDecorator;
 use LWPsix::Headers::Cookie;
 use LWPsix::Headers::HeaderSet;
 
-# The errors I get seem to have to do with roles...  although they persist when
-# I comment out the "does" stuff...  Idk.  Just commenting this out so you can play around with it.
-
+#Commented out during compilation due to compiler/VM errors with roles
 =begin DOG
 class LWPsix::Headers::CookieJar does LWPsix::Headers::ResponseExaminer does LWPsix::Headers::RequestDecorator {
 	has LWPsix::Headers::Cookie %!Cookies; 

@@ -16,6 +16,10 @@ class LWPsix::Headers::HeaderSet {
 		
 	}
 	
+	method add($field, $value) {
+		%HeadPairs{$field} = $value;
+	}
+	
 	# Retrieve the value associated w/ a header field within the HeaderSet.
 	method get($field) {
 		return %!HeadPairs{$field};

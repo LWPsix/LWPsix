@@ -5,8 +5,7 @@ class LWPsix::Headers::Identity {
 	has $!password;
 	has $!security;
 
-	# Doesn't compile:
-	#method new is abstract;
+	method new {...};
 	
 	method text() {
 	

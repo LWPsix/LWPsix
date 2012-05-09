@@ -51,9 +51,6 @@ class LWPsix::Headers::CredentialCache {
 		
 	}
 	
-	
-	#is this needed?
-	
 	method getIdentity(:$domain, :$realm) {
 	
 		# If the $domain~"|"~$realm key does not give an Identity back,
