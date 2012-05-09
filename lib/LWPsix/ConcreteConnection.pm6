@@ -1,11 +1,12 @@
 use v6;
 
 class LWPsix::ConcreteConnection {
-	has IO::Socket::INET $sock;
+	has IO::Socket::INET $!sock;
 
 	method new(Str $host, Int $port) {
 	say "Created new socket for $host on port $port...";
 	$sock = IO::Socket::INET.new(:$host);
+	# TODO: $sock still Any()
 	self.bless(*);
 	}
 
@@ -21,7 +22,7 @@ class LWPsix::ConcreteConnection {
     method recv() {
 		my $recvd = $!sock.recv();
 		# TODO: Parse response into a Response object
-		return $recvd; #Response.new($recvd);
+		return Response.new($recvd);
 	}
 
     method DESTROY() {

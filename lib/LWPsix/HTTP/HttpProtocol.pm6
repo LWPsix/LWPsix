@@ -8,8 +8,9 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
     #has LWPsix::Headers::ResponseExaminer @.examiners;
     #has LWPsix::Headers::RequestDecorator @.decorators;
     #has LWPsix::Connection %.connection_for_host;
-    #has ProxyServer $.proxy;
 
+	# TODO: keep-alive and proxy parameters
+	# TODO: custom constructor which takes in keep-alive and proxy flags
   method request(Str $url, Str :$method = 'GET') {
 	my $sep = $url.index("/");
 	my $host;
@@ -31,7 +32,7 @@ class LWPsix::HTTP::HttpProtocol is LWPsix::Protocol {
 	@lines.push: "Connection: close";
 
 	say "Constructing $method request for $url...";
-        # TODO: Decorators
+    # TODO: Decorators
 	say "Adding request decorators...";
 
         my Str $request = @lines.join: "\r\n";

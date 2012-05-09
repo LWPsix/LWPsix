@@ -27,7 +27,7 @@ class LWPsix::Response {
 				say "Received $.content_type type of content";
 			}
 
-			# TODO: serialize headers
+			# TODO: ResponseExaminer -- serialize headers 
 
 			$end_range++;
 		}
